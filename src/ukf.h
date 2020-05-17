@@ -95,6 +95,29 @@ class UKF {
 
   // Sigma point spreading parameter
   double lambda_;
+
+  // Augmented mean vector
+  Eigen::VectorXd x_aug_;
+
+  // Augmented state covariance
+  Eigen::MatrixXd P_aug_;
+
+  // Augmented sigma point matrix
+  Eigen::MatrixXd Xsig_aug_;
+
+  // NIS for radar
+  double NIS_radar_;
+
+  // NIS for laser
+  double NIS_laser_;
+
+  private:
+  bool InitialiseStateFromMeasurement(const MeasurementPackage& meas_package);
+
+  // Prediction Step
+  void CreateAugmentedSigmaPoints();
+  void PredictSigmaPoints(double delta_t);
+  void PredictMeanAndCovariance();
 };
 
 #endif  // UKF_H
