@@ -118,6 +118,14 @@ class UKF {
   void CreateAugmentedSigmaPoints();
   void PredictSigmaPoints(double delta_t);
   void PredictMeanAndCovariance();
+
+  //Lidar Measurements
+  void PredictLidarMeasurement(Eigen::MatrixXd& Zsig, Eigen::VectorXd& z_pred, Eigen::MatrixXd& S);
+  void UpdateLidarFromMeasurement(const MeasurementPackage& meas_package, const Eigen::MatrixXd& Zsig, const Eigen::VectorXd& z_pred, const Eigen::MatrixXd& S);
+
+  //Radar Measurements
+  void PredictRadarMeasurement(Eigen::MatrixXd& Zsig, Eigen::VectorXd& z_pred, Eigen::MatrixXd& S);
+  void UpdateRadarFromMeasurement(const MeasurementPackage& meas_package, const Eigen::MatrixXd& Zsig, const Eigen::VectorXd& z_pred, const Eigen::MatrixXd& S);
 };
 
 #endif  // UKF_H
